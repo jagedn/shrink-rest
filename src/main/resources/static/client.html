@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var url = $("#url").val()
+        $.post("../shrink/generate/",{
+            url : url
+        }, function(data,status){
+            console.log(data);
+            $("#shrink_href").attr('href',data.url)
+            $("#shrink_href_txt").text(data.url)
+
+            $('#generated').append( $('<li>').append(
+                $('<a>').attr('target','_blank').attr('href',data.url).append(
+                    $('<span>').append(url + " = " + data.url)
+            )));
+
+        }).fail(function() {
+            alert( "Creo que nos hemos consumido todos los codigos disponibles. habra que esperar a que se liberen" );
+        });
+    });
+});
+</script>
+</head>
+<body>
+    URL : <input type="text" name="url" id="url" size="200"><br/>
+    <button>Generate</button><br/>
+
+    <a target="_blank" id="shrink_href" href="#"><span id="shrink_href_txt">&nbsp;</span></a>
+
+    <hr/>
+    <ol id="generated">
+
+    </ol>
+
+</body>
+</html>

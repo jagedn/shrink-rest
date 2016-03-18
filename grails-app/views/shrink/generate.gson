@@ -1,0 +1,13 @@
+import grails.core.*
+import grails.util.*
+import grails.plugins.*
+import org.grails.core.artefact.*
+
+model {
+	Map shrink
+}
+
+json {
+    code shrink.code
+    url shrink.url
+}
